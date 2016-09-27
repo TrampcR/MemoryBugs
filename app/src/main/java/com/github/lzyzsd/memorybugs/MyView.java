@@ -14,6 +14,10 @@ import android.view.View;
  * Created by bruce on 2/26/16.
  */
 public class MyView extends View {
+
+    private RectF mRect = new RectF(0, 0, 100, 100);
+    private Paint mPaint = new Paint();
+
     public MyView(Context context) {
         super(context);
     }
@@ -35,10 +39,8 @@ public class MyView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        RectF rect = new RectF(0, 0, 100, 100);
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        paint.setStrokeWidth(4);
-        canvas.drawArc(rect, 0, 180, true, paint);
+        mPaint.setColor(Color.RED);
+        mPaint.setStrokeWidth(4);
+        canvas.drawArc(mRect, 0, 180, true, mPaint);
     }
 }

@@ -14,7 +14,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static TextView sTextView;
+    public static final String LINE_TAG = "-------: ";
+    private Rect mRect;
+    private String mLogString;
+
+    private TextView mTextView;
     private Button mStartBButton;
     private Button mStartAllocationButton;
 
@@ -30,8 +34,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sTextView = (TextView) findViewById(R.id.tv_text);
-        sTextView.setText("Hello World!");
+        mRect = new Rect(0, 0, 100, 100);
+        mLogString = LINE_TAG + mRect.width();
+
+        mTextView = (TextView) findViewById(R.id.tv_text);
+        mTextView.setText(R.string.hello_world);
 
         mStartBButton = (Button) findViewById(R.id.btn_start_b);
         mStartBButton.setOnClickListener(this);
@@ -61,14 +68,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.out.println("post delayed may leak");
             }
         }, 5000);
-        Toast.makeText(this, "请注意查看通知栏LeakMemory", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.leakmemory, Toast.LENGTH_SHORT).show();
     }
 
     private void startAllocationLargeNumbersOfObjects() {
-        Toast.makeText(this, "请注意查看MemoryMonitor 以及AllocationTracker", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.memory_monitor, Toast.LENGTH_SHORT).show();
         for (int i = 0; i < 10000; i++) {
-            Rect rect = new Rect(0, 0, 100, 100);
-            System.out.println("-------: " + rect.width());
+            System.out.println(mLogString);
         }
     }
 }
